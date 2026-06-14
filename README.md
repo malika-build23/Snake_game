@@ -1,17 +1,56 @@
-# React + Vite
+# Multiplayer Snake Game 🐍
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A real-time multiplayer snake game where players from all over the world can join, eat food to grow their snakes, and compete for the highest score on the global leaderboard. 
 
-Currently, two official plugins are available:
+Built with React, HTML5 Canvas, and Socket.io!
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🎮 Features
+- **Real-Time Multiplayer:** Instant synchronization between all players using WebSockets (Socket.io).
+- **Global Leaderboard:** Track the top 5 highest-scoring players in real time.
+- **Smooth Canvas Rendering:** Efficient 60 FPS drawing using the HTML5 Canvas API.
+- **Auto-Reconnect:** Gracefully handles server "sleep" states (like Render's free tier) and automatically joins you to the game once connected.
 
-## React Compiler
+## 🛠️ Tech Stack
+- **Frontend:** React, Vite, HTML5 Canvas
+- **Backend:** Node.js, Express, Socket.io
+- **Deployment:** Vercel (Frontend) & Render (Backend)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🚀 How to Run Locally
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-https://snake-game-teal-five.vercel.app/
+### 1. Start the Backend Server
+The backend handles the game logic, player coordinates, and food spawning.
+
+```bash
+cd server
+npm install
+npm start
+```
+*The server will run on `http://localhost:3000` by default.*
+
+### 2. Start the Frontend App
+The frontend is the React application where the game is actually played.
+
+```bash
+# In the root folder (Snake_game)
+npm install
+npm run dev
+```
+
+### 3. Connect the Frontend to Localhost
+If you are testing locally, make sure your frontend is pointing to your local server instead of the live production server.
+In `src/hooks/useSocket.jsx`:
+```javascript
+// Uncomment the localhost line and comment out the production line:
+const SERVER_URL = "http://localhost:3000";
+// const SERVER_URL = "https://snake-game-1-99x5.onrender.com/";
+```
+
+---
+
+## 🕹️ How to Play
+1. Enter your name and click **Join Game**.
+2. Move your mouse to steer your snake.
+3. Eat the orange dots (food) to grow longer and increase your score.
+4. **Avoid other snakes and yourself!** If your head touches another snake's body or your own body, you will die and respawn.
