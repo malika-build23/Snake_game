@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import socket from "../hooks/useSocket";
 
-function GameCanvas() {
+function GameCanvas({ playerName }) {
     const canvasRef = useRef(null);
 
     useEffect(() => {
@@ -95,6 +95,9 @@ function GameCanvas() {
         }
 
         /* ================= SOCKET EVENTS ================= */
+
+        socket.connect();
+        socket.emit("join", playerName);
 
         socket.on("init", (data) => {
             snake.id = data.id;
@@ -481,10 +484,7 @@ function GameCanvas() {
                         Math.PI * 2
                     );
 
-                    ctx.fillStyle =
-                        index === 0
-                            ? snake.color
-                            : snake.color.replace("50%)", "40%)");
+                    ctx.fillStyle = snake.color;
 
                     ctx.fill();
 
