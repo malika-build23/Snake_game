@@ -25,7 +25,8 @@ function App() {
     return (
       <div
         style={{
-          height: "100vh",
+          position: "fixed",
+          inset: 0,
           background: "#111",
           color: "white",
           display: "flex",
