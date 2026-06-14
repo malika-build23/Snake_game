@@ -96,8 +96,14 @@ function GameCanvas({ playerName }) {
 
         /* ================= SOCKET EVENTS ================= */
 
+        socket.on("connect", () => {
+            socket.emit("join", playerName);
+        });
+
         socket.connect();
-        socket.emit("join", playerName);
+        if (socket.connected) {
+            socket.emit("join", playerName);
+        }
 
         socket.on("init", (data) => {
             snake.id = data.id;
@@ -682,6 +688,7 @@ function GameCanvas({ playerName }) {
                 handleResize
             );
 
+            socket.off("connect");
             socket.off("init");
 
             socket.off(
