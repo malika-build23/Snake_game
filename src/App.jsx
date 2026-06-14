@@ -14,10 +14,6 @@ function App() {
       return;
     }
 
-    socket.connect();
-
-    socket.emit("join", trimmedName);
-
     setJoined(true);
   }
 
@@ -25,8 +21,7 @@ function App() {
     return (
       <div
         style={{
-          position: "fixed",
-          inset: 0,
+          height: "100vh",
           background: "#111",
           color: "white",
           display: "flex",
@@ -36,7 +31,16 @@ function App() {
           gap: "20px",
         }}
       >
-        <h1>🐍 Multiplayer Snake</h1>
+        <h1
+          style={{
+            color: "#ffffff",
+            fontSize: "64px",
+            marginBottom: "20px",
+            textShadow: "0 0 20px rgba(0,255,136,0.5)",
+          }}
+        >
+          🐍 Multiplayer Snake
+        </h1>
 
         <input
           type="text"
@@ -71,7 +75,7 @@ function App() {
     );
   }
 
-  return <GameCanvas />;
+  return <GameCanvas playerName={playerName.trim()} />;
 }
 
 export default App;
