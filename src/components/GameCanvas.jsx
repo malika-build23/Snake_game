@@ -230,6 +230,9 @@ function GameCanvas({ playerName }) {
                         food.id
                     );
 
+                    // Remove food locally immediately to prevent infinite growth trigger
+                    foods.splice(i, 1);
+
                     break;
                 }
             }
